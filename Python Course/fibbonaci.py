@@ -9,4 +9,4 @@ while i < 40:
     sterm = fterm + sterm
     fterm = temp
     i += 1
-8=D
+

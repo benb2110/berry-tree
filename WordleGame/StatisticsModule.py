@@ -2,7 +2,6 @@
 #We need to
 #At the end of a game take "guess_count" and write to .txt file
 #Organise the data and display to user after the game
-#Learn how to import scripts
 
 from collections import Counter
 score = input("Score ")

@@ -4,7 +4,7 @@
 #Create rotating algo X
 #Randomize cube algo
 #Rubix cube auto-solving algo
-#interesting text visualisation
+#interesting text visualisation of cube faces
 
 #Rubix Cube Array Ideas
  #  [1a(w), 1b(w), 1c(w)]
