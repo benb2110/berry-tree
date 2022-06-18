@@ -1,6 +1,7 @@
 #to-do
 #Statistics X
 #Double yellow hint mechanic breaks in the event that the second guess letter is Green. Fix?
+#Try to shrink the five letter checks down to one loop
 #UI
 
 import random
@@ -87,8 +88,10 @@ while guess_count < 6:
             #printing feedback to the user
             print(A,  B,  C,  D,  E,)
             print("Guess " + str(guess_count) + "/6")
+            print(word) #debug
             if guess == word:
                 print("Congrats you found the word! " + word.upper())
+                #saving guess count to file and printing statistics
                 with open('statistics.txt', 'a') as stats:
                     stats.write(str(guess_count))
                     stats.write('\n')
