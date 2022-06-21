@@ -1,44 +1,19 @@
 test_diagnostic_report = ['00100', '11110', '10110', '10111', '10101', '01111', '00111', '11100', '10000', '11001', '00010', '01010']
-#test_diagnostic_report = open('Day 3_Diagnostic_Data.txt').read().split()
+#diagnostic_report = open('Day 3_Diagnostic_Data.txt').read().split()
+
+#Task: Verify 'life support rating' by multiplying 'oxygen generator rating' and the 'CO2 scrubber rating'
+#To find 'oxygen genrator rating first identify the most common value in the current bit position and then keeping only numbers with that value
+#If 0 and 1 are equally common, keep only 1's
+
+#To find C02 scrubber rating find the least common bit for each bit position and then discard the most common
+#If 0 and 1 are equally common, keep only 0's
 
 
-a = [word[0] for word in test_diagnostic_report]
-b = [word[1] for word in test_diagnostic_report]
-c = [word[2] for word in test_diagnostic_report]
-d = [word[3] for word in test_diagnostic_report]
-e = [word[4] for word in test_diagnostic_report]
-data = [a, b, c, d, e]
-gamma = [0, 0, 0, 0, 0]
-epsilon = [0, 0, 0, 0, 0]
+#Method
+#Parse the numbers and first most common value
+#Parse the numbers and remove all other values
+#Continue to next bit position
 
-# shrink all this down to one loop
-#most common binary digits
-for i in range(len(test_diagnostic_report)):
-    for j in range(0, 5):
-        x = data[j].count('1')
-        y = data[j].count('0')
-        if x > y:
-            gamma[j] = 1
-        else:
-            gamma[j] = 0    # I got a nested loop working woohooo!
-#least common binary digits
-for i in range(len(test_diagnostic_report)):
-    for j in range(0, 5):
-        x = data[j].count('1')
-        y = data[j].count('0')
-        if x < y:
-            epsilon[j] = 1
-        else:
-            epsilon[j] = 0
+print(max(test_diagnostic_report))
+print(test_diagnostic_report[1].count('0'))
 
-
-#convert to decimal and multiply the gamma and epsilon rate to get fuel consumption
-
-print(gamma)
-print(epsilon)
-gamma = ''.join(str(i) for i in gamma)
-epsilon = ''.join(str(i) for i in epsilon)
-print(int(gamma, 2))
-print(int(epsilon, 2))
-power_consumption = (int(gamma, 2)) * (int(epsilon, 2))
-print(power_consumption)

@@ -8,3 +8,4 @@ while i < len(N) and not found_k:
         i += 1
 
 
+
