@@ -67,3 +67,12 @@ def array123(nums):
     print(i+2)
     return i == 1 and i+1 == 2 and i+2 == 3
 print(array123([1, 1, 2, 4, 1]))
+
+
+
+
+def same_first_last(nums):
+    if nums[0] == nums[-1] and len(nums) > 1:
+      return True
+    else:
+      return False

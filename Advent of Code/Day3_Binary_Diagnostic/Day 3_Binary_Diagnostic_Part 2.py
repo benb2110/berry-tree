@@ -1,6 +1,3 @@
-#Find most common bit in first column and discard items that have least common bit in that columns
-#Repeat for column 2,3, 4 and so on. This is call
-
 #test_diagnostic_report = ['00100', '11110', '10110', '10111', '10101', '01111', '00111', '11100', '10000', '11001', '00010', '01010']
 test_diagnostic_report = open('Day 3_Diagnostic_Data.txt').read().split()
 
