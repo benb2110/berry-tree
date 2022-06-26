@@ -26,7 +26,6 @@ def ox_gen_rating(diags, q):
             x += 1
         else:
             y += 1
-    print(x, y)
     if x >= y:
         for h in range(len(diags)):
             if diags[h][q] == '1':
@@ -38,7 +37,6 @@ def ox_gen_rating(diags, q):
                 new_list.append(diags[h])
         return new_list
 
-print(" ")
 def c02_scrub_rating(diags, q):
     x = 0
     y = 0
@@ -48,7 +46,6 @@ def c02_scrub_rating(diags, q):
             x += 1
         else:
             y += 1
-    print(x, y)
     if y <= x:
         for h in range(len(diags)):
             if diags[h][q] == '0':
