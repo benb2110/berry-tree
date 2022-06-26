@@ -8,23 +8,10 @@ diagnostic_report = open('Day 3_Diagnostic_Data.txt').read().split()
 #To find C02 scrubber rating find the least common bit for each bit position and then discard the most common
 #If 0 and 1 are equally common, keep only 0's
 
+#Test case working
+#Not working with data
 
-
-
-def diagnostics_convert(diagnostics):
-    data_set = []
-    for i in range(len(diagnostics[0])):
-        data = []
-        for j in range(len(diagnostics)):
-            data.append([diagnostics[j]])
-    data_set.append(data)
-    return data_set[0] #Creates an extra list element: Fix! but working
-
-diagnostics = diagnostics_convert(test_diagnostic_report)  #test
-#diagnostics = diagnostics_convert(diagnostic_report)
-print(diagnostic_report)
-
-
+diagnostics = diagnostic_report
 
 oxygen_generator_rating = diagnostics
 C02_scrubber_rating = diagnostics
@@ -35,50 +22,60 @@ def ox_gen_rating(diags, q):
     y = 0
     new_list = []
     for j in range(len(diags)):
-        if oxygen_generator_rating[j][0][q] == '1':
+        if diags[j][q] == '1':
             x += 1
         else:
             y += 1
+    print(x, y)
     if x >= y:
         for h in range(len(diags)):
-            if oxygen_generator_rating[h][0][q] == '1':
+            if diags[h][q] == '1':
                 new_list.append(diags[h])
         return new_list
-    elif y > x:
+    else:
         for h in range(len(diags)):
-            if diagnostics[h][0][q] == '0':
+            if diagnostics[h][q] == '0':
                 new_list.append(diags[h])
         return new_list
 
-
-def c02_scrubb_rating(diags, q):
+print(" ")
+def c02_scrub_rating(diags, q):
     x = 0
     y = 0
     new_list = []
     for j in range(len(diags)):
-        if C02_scrubber_rating[j][0][q] == '1':
+        if diags[j][q] == '1':
             x += 1
         else:
             y += 1
+    print(x, y)
     if y <= x:
         for h in range(len(diags)):
-            if C02_scrubber_rating[h][0][q] == '0':
+            if diags[h][q] == '0':
                 new_list.append(diags[h])
         return new_list
-    elif x < y:
+    else:
         for h in range(len(diags)):
-            if diagnostics[h][0][q] == '1':
+            if diags[h][q] == '1':
                 new_list.append(diags[h])
         return new_list
 
 
-for q in range(5):
+for q in range(len(diagnostics[0])):
+    if len(oxygen_generator_rating) == 1:
+        break
     oxygen_generator_rating = ox_gen_rating(oxygen_generator_rating, q)
 print(oxygen_generator_rating)
 
-#for q in range(5):
-    #C02_scrubber_rating = c02_scrubb_rating(C02_scrubber_rating, q)
-#print(C02_scrubber_rating)
+for q in range(len(diagnostics[0])):
+    if len(C02_scrubber_rating) == 1:
+        break
+    C02_scrubber_rating = c02_scrub_rating(C02_scrubber_rating, q)
+print(C02_scrubber_rating)
 
 
+oxygen_generator_rating = ''.join(str(i) for i in oxygen_generator_rating)
+C02_scrubber_rating = ''.join(str(i) for i in C02_scrubber_rating)
 
+life_support_rating = (int(oxygen_generator_rating, 2)) * (int(C02_scrubber_rating, 2))
+print(life_support_rating)
