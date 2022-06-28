@@ -76,3 +76,44 @@ def same_first_last(nums):
       return True
     else:
       return False
+
+def lone_sum(a, b, c):
+  if a == b and a == c:
+    return 0
+  elif a == b:
+    return c
+  elif b == c:
+    return a
+  elif c == a:
+    return b
+  if a == b and a == c:
+    return 0
+  else:
+    return a+b+c
+
+
+
+def round10(num):
+  if num[-1] >= 5:
+    num = (num[1]-10) + num
+  elif num[-1] < 5:
+    num = num-num[-1]
+  return num
+
+def round_sum(a, b, c):
+    x = round10(a)+round10(b)+round10(c)
+    return x
+
+
+
+def mean_av(nums):
+  sum = 0
+  div = len(nums)
+  for i in range(len(nums)):
+    sum = sum + nums[i]
+  mean = sum / div
+  return mean
+
+def centered_average(nums):
+  x = mean_av(nums)
+  return x

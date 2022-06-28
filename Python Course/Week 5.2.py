@@ -1,6 +1,11 @@
-y = "Hello"
-x = y
-print(hex(id(y)))
-print(hex(id(x)))
-x.clear()
-print(y)
+#while True:
+ #   line = input('> ')
+  #  if line == 'done':
+   #     break
+#print(line)
+
+def sqr_root(a, x):
+    y = (x + a/x) / 2
+    return y
+
+print(sqr_root(4, 3))
