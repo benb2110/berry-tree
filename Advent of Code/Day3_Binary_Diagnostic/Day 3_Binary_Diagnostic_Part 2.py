@@ -1,48 +1,74 @@
-#test_diagnostic_report = ['00100', '11110', '10110', '10111', '10101', '01111', '00111', '11100', '10000', '11001', '00010', '01010']
-test_diagnostic_report = open('Day 3_Diagnostic_Data.txt').read().split()
+test_diagnostic_report = ['00100', '11110', '10110', '10111', '10101', '01111', '00111', '11100', '10000', '11001', '00010', '01010']
+diagnostic_report = open('Day 3_Diagnostic_Data.txt').read().split()
 
-a = [word[0] for word in test_diagnostic_report]
-b = [word[1] for word in test_diagnostic_report]
-c = [word[2] for word in test_diagnostic_report]
-d = [word[3] for word in test_diagnostic_report]
-e = [word[4] for word in test_diagnostic_report]
-f = [word[5] for word in test_diagnostic_report]
-g = [word[6] for word in test_diagnostic_report]
-h = [word[7] for word in test_diagnostic_report]
-i = [word[8] for word in test_diagnostic_report]
-j = [word[9] for word in test_diagnostic_report]
-k = [word[10] for word in test_diagnostic_report]
-l = [word[11] for word in test_diagnostic_report]
 
-data = [a, b, c, d, e, f, g, h, i, j, k, l]
-gamma = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-epsilon = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+diagnostics = diagnostic_report
 
-# shrink all this down to one loop
-for item in range(len(test_diagnostic_report)):
-    for jitem in range(0, 12):
-        x = data[jitem].count('1')
-        y = data[jitem].count('0')
-        if x > y:
-            gamma[jitem] = 1
+oxygen_generator_rating = diagnostics
+C02_scrubber_rating = diagnostics
+
+
+def ox_gen_rating(diags, q):
+    x = 0
+    y = 0
+    new_list = []
+    for j in range(len(diags)):
+        if diags[j][q] == '1':
+            x += 1
         else:
-            gamma[jitem] = 0    # I got a nested loop working woohooo!
+            y += 1
+    #print(x, y) #debug
+    if x >= y:
+        for h in range(len(diags)):
+            if diags[h][q] == '1':
+                new_list.append(diags[h])
+        #print(new_list) #debug
+        return new_list
+    else:
+        for h in range(len(diags)):
+            if diags[h][q] == '0':
+                new_list.append(diags[h])
+        #print(new_list) #debug
+        return new_list
 
-for item in range(len(test_diagnostic_report)):
-    for jitem in range(0, 12):
-        x = data[jitem].count('1')
-        y = data[jitem].count('0')
-        if x < y:
-            epsilon[jitem] = 1
+
+def c02_scrub_rating(diags, q):
+    x = 0
+    y = 0
+    new_list = []
+    for j in range(len(diags)):
+        if diags[j][q] == '1':
+            x += 1
         else:
-            epsilon[jitem] = 0
+            y += 1
+    #print(x, y) #debug
+    if y <= x:
+        for h in range(len(diags)):
+            if diags[h][q] == '0':
+                new_list.append(diags[h])
+        return new_list
+    else:
+        for h in range(len(diags)):
+            if diags[h][q] == '1':
+                new_list.append(diags[h])
+        return new_list
+    #print(new_list) #debug
 
-#convert to decimal and multiply the gamma and epsilon rate to get fuel consumption
-print(gamma)
-print(epsilon)
-gamma = ''.join(str(i) for i in gamma)
-epsilon = ''.join(str(i) for i in epsilon)
-print(int(gamma, 2))
-print(int(epsilon, 2))
-power_consumption = (int(gamma, 2)) * (int(epsilon, 2))
-print(power_consumption)
+for q in range(len(diagnostics[0])):
+    if len(oxygen_generator_rating) == 1:
+        break
+    oxygen_generator_rating = ox_gen_rating(oxygen_generator_rating, q)
+print(oxygen_generator_rating)
+
+for q in range(len(diagnostics[0])):
+    if len(C02_scrubber_rating) == 1:
+        break
+    C02_scrubber_rating = c02_scrub_rating(C02_scrubber_rating, q)
+print(C02_scrubber_rating)
+
+
+oxygen_generator_rating = ''.join(str(i) for i in oxygen_generator_rating)
+C02_scrubber_rating = ''.join(str(i) for i in C02_scrubber_rating)
+
+life_support_rating = (int(oxygen_generator_rating, 2)) * (int(C02_scrubber_rating, 2))
+print(life_support_rating)
