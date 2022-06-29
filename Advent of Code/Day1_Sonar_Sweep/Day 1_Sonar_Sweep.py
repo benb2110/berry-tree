@@ -1,4 +1,4 @@
-depth_data = open('Day1_Depths_Data.txt').read().split()
+depth_data = open('Depths_Data.txt').read().split()
 #depth_data = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]  #testing, should == 7
 deeper_count = 0
 

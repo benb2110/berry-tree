@@ -1,5 +1,5 @@
 test_diagnostic_report = ['00100', '11110', '10110', '10111', '10101', '01111', '00111', '11100', '10000', '11001', '00010', '01010']
-diagnostic_report = open('Day 3_Diagnostic_Data.txt').read().split()
+diagnostic_report = open('Diagnostic_Data.txt').read().split()
 
 
 diagnostics = diagnostic_report

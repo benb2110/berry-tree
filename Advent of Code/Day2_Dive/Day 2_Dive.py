@@ -1,5 +1,5 @@
 #inputs = "forward", 5, "down", 5, "forward", 8, "up", 3, "down", 8, "forward", 2
-inputs = open('Day 2_Dive_Inputs.txt').read().split()
+inputs = open('Dive_Inputs.txt').read().split()
 
 direction = inputs[0:-1:2]
 movement = inputs[1::2]
