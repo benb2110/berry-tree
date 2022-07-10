@@ -66,7 +66,7 @@ def array123(nums):
     print(i+1)
     print(i+2)
     return i == 1 and i+1 == 2 and i+2 == 3
-print(array123([1, 1, 2, 4, 1]))
+#print(array123([1, 1, 2, 4, 1]))
 
 
 
@@ -119,12 +119,15 @@ def centered_average(nums):
   return x
 
 
+
 def cat_dog(str):
-  c_cnt = 0
-  d_cnt = 0
-  for i in range(len(str)-2):
-    if str[i] == 'c' and str[i]+1 == 'a' and str[i]+2 == 't':
-      c_cnt +=1
-    if str[i] == 'd' and str[i]+1 == 'o' and str[i]+2 == 'g':
-      d_cnt +=1
-  return c_cnt == d_cnt
+  c_cnt = str.count("cat")
+  d_cnt = str.count("dog")
+  if c_cnt == d_cnt:
+      return True
+  else:
+      return False
+
+str = "heloocatworld1doodoo"
+print(cat_dog(str))
+x = "xyz" in str and ".xyz" not in str
