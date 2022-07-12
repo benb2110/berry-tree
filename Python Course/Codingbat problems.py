@@ -131,3 +131,22 @@ def cat_dog(str):
 str = "heloocatworld1doodoo"
 print(cat_dog(str))
 x = "xyz" in str and ".xyz" not in str
+
+
+def centered_average(nums):
+  if nums[0] == nums[1]:
+    del nums[1]
+  del nums[0]
+  if nums[-1] == nums[-2]:
+    del nums[-2]
+  del nums[-1]
+  numlen = len(nums)
+
+  s = 0
+  for i in range(len(nums)):
+    print(nums[i])
+    s = s + nums[i]
+  mean = int(s)/int(len(nums))
+  return int(mean)
+
+print(centered_average([1, 2, 3, 5, 6, 6, 8, 12, 24, 56, 80]))
