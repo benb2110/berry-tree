@@ -88,7 +88,7 @@ while guess_count < 6:
             #printing feedback to the user
             print(A,  B,  C,  D,  E,)
             print("Guess " + str(guess_count) + "/6")
-            print(word) #debug
+            #print(word) #debug
             if guess == word:
                 print("Congrats you found the word! " + word.upper())
                 #saving guess count to file and printing statistics
