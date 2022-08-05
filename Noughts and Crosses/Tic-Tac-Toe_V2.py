@@ -39,7 +39,7 @@ def player_turn(player):
 
 
 def game(): #Gameloop
-    while win_check("O") is not True and win_check("X") is not True:
+    while True:
         print_board()
         player_turn("O")
         if win_check("O") is True:
