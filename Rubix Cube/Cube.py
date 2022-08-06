@@ -1,6 +1,6 @@
 #import numpy as np
 #import random
-
+import pprint as pprint
 
 
 #create cube
@@ -22,10 +22,17 @@ def cube_vis():
     print(yellow_face[3] + yellow_face[4] + yellow_face[5])
     print(yellow_face[6] + yellow_face[7] + yellow_face[8])
 
-
-
-
-
+def cube_vis_formatted():
+    width=7
+    print("|{a:^{width}}{b:^{width}}{c:^{width}}|".format(a=white_face[0], b=white_face[1], c=white_face[2], width=width))
+    print("|{a:^{width}}{b:^{width}}{c:^{width}}|".format(a=white_face[3], b=white_face[4], c=white_face[5], width=width))
+    print("|{a:^{width}}{b:^{width}}{c:^{width}}|".format(a=white_face[6], b=white_face[7], c=white_face[8], width=width))
+    print("|{a:^{width}}{b:^{width}}{c:^{width}}|{d:^{width}}{e:^{width}}{f:^{width}}|{g:^{width}}{h:^{width}}{i:^{width}}|{j:^{width}}{k:^{width}}{l:^{width}}|".format(a=green_face[0], b=green_face[1], c=green_face[2], d=red_face[0], e=red_face[1], f=red_face[2], g= blue_face[0], h= blue_face[1], i=blue_face[2], j=orange_face[0], k=orange_face[1], l=orange_face[2], width=width))
+    print("|{a:^{width}}{b:^{width}}{c:^{width}}|{d:^{width}}{e:^{width}}{f:^{width}}|{g:^{width}}{h:^{width}}{i:^{width}}|{j:^{width}}{k:^{width}}{l:^{width}}|".format(a=green_face[3], b=green_face[4], c=green_face[5], d=red_face[3], e=red_face[4], f=red_face[5], g= blue_face[3], h= blue_face[4], i=blue_face[5], j=orange_face[3], k=orange_face[4], l=orange_face[5], width=width))
+    print("|{a:^{width}}{b:^{width}}{c:^{width}}|{d:^{width}}{e:^{width}}{f:^{width}}|{g:^{width}}{h:^{width}}{i:^{width}}|{j:^{width}}{k:^{width}}{l:^{width}}|".format(a=green_face[6], b=green_face[7], c=green_face[8], d=red_face[6], e=red_face[7], f=red_face[8], g= blue_face[6], h= blue_face[7], i=blue_face[8], j=orange_face[6], k=orange_face[7], l=orange_face[8], width=width))
+    print("|{a:^{width}}{b:^{width}}{c:^{width}}|".format(a=yellow_face[0], b=yellow_face[1], c=yellow_face[2], width=width))
+    print("|{a:^{width}}{b:^{width}}{c:^{width}}|".format(a=yellow_face[3], b=yellow_face[4], c=yellow_face[5], width=width))
+    print("|{a:^{width}}{b:^{width}}{c:^{width}}|".format(a=yellow_face[6], b=yellow_face[7], c=yellow_face[8], width=width))
  # (Key: white top, red north, green east, orange south, blue west, yellow under)
  # If white is rotated clockwise red-> blue-> orange-> green rotate (a,b,c) are shifted
  # If green is rotated clockwise white-> orange-> yellow-> red (c,f,i) are shifted respectively
@@ -83,7 +90,8 @@ def rotate_yellow_clockwise():
 
 move = None
 while move != "end":
-    cube_vis()
+    cube_vis_formatted()
+    #cube_vis()
     move = input("which face would you like to rotate?")
     if move == "white":
         rotate_white_anticlockwise()
