@@ -1,1 +1,2 @@
-#Create a sudoku Solver
+def sudoku_solver():
+    pass

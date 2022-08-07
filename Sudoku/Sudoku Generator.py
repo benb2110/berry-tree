@@ -1,1 +1,2 @@
-#Create a program that generates a random sudoku puzzle
+def sudoku_generator():
+    pass
