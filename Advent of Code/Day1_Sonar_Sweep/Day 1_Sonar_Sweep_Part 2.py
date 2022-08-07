@@ -1,4 +1,4 @@
-#depth_data = 199, 200, 208, 210, 200, 207, 240, 269, 260, 263
+#depth_data = 199, 200, 208, 210, 200, 207, 240, 269, 260, 263 #Test Data
 depth_data = open('Depths_Data.txt').read().split()
 depth_data2 = depth_data[1:]
 depth_data3 = depth_data[2:]

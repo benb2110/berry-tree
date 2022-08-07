@@ -1,10 +1,9 @@
-#inputs = "forward", 5, "down", 5, "forward", 8, "up", 3, "down", 8, "forward", 2
+#inputs = "forward", 5, "down", 5, "forward", 8, "up", 3, "down", 8, "forward", 2 #Test Data
 inputs = open('Dive_Inputs.txt').read().split()
 
 direction = inputs[0:-1:2]
 movement = inputs[1::2]
-#print(direction)
-#print(movement)
+
 
 pos_horizontal = 0
 pos_depth = 0

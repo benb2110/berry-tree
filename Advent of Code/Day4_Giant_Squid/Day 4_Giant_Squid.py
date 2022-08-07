@@ -43,17 +43,16 @@ def number_draw(draw, boards): #Checks each spot on the boards for the draw numb
                 for k in range(5):
                     if draw[i] == boards[j][h][k]:
                         boards[j][h][k] = 'X'
-                        test = winning_board(boards)
-                        if test is not None:
+                        winner = winning_board(boards)
+                        if winner is not None:
                             winning_number = draw[i]
-                            board_winner = test
                             score = 0
                             for k in range(5):
                                 for h in range(5):
-                                    if boards[board_winner][h][k] == 'X':
+                                    if boards[winner][h][k] == 'X':
                                         continue
                                     else:
-                                        score += boards[board_winner][h][k]
+                                        score += boards[winner][h][k]
                             score = score * winning_number
                             return score
 
