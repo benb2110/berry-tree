@@ -4,7 +4,27 @@
 # e  f
 #  g
 
+#This approach involves comparing the segments in each unknown number against our four known numbers (1, 4, 7, 8). if the segment is shared
+# we get append True into its signature.
+# It turns out each unknown number has a unique combination of shared segments with numbers (1, 4, 7)
+
+    #6 letters
+#zero   2, 3, 3   #Zero and Nine shares two 2 segments with One, but six uniquely shares 1
+#six    1, 3, 2
+#nine   2, 4, 3
+
+    #5 letters
+#two    1, 2, 2
+#three  2, 3, 3
+#five   1, 3, 2
+
+#Now that we know the signatures for our unknown numbers we can compare them with the knowns and output the correct ones
+
+
 #segments = ['abcefg', 'cf', 'acdeg', 'acdfg', 'bcdf', 'abdfg', 'abdefg', 'acf', 'abcdefg', 'abcdfg']
+
+unknowns = ['abcefg', 'acdeg', 'acdfg', 'abdfg', 'abdefg', 'abcdfg']
+knowns = ['cf', 'bcdf', 'acf', 'abcdefg']
 
 zero = 'abcefg'
 one = 'cf'
@@ -18,56 +38,32 @@ eight = 'abcdefg'
 nine = 'abcdfg'
 
 
-def in_common(n): # outputs 4 unique bool signatures
-    sig = [], [], []
-    for i in range(len(n)):
-        if n[i] in one:
-            sig[0].append(True)
-        else:
-            sig[0].append(False)
-    for j in range(len(n)):
-        if n[j] in four:
-            sig[1].append(True)
-        else:
-            sig[1].append(False)
-    for k in range(len(n)):
-        if n[k] in seven:
-            sig[2].append(True)
-        else:
-            sig[2].append(False)
-
+def in_common2(string):
+    sig = [],[],[],[],[],[]
+    for i in range(len(string)):
+        for k in range(3):
+            temp = []
+            sig[i].append(temp)
+            for j in range(len(string[i])):
+                if string[i][j] in knowns[k]:
+                    temp.append(True)
     return sig
 
 
 
-zero_sig = in_common(zero)
-one_sig = in_common(one)
-two_sig = in_common(two)
-three_sig = in_common(three)
-four_sig = in_common(four)
-five_sig = in_common(five)
-six_sig = in_common(six)
-seven_sig = in_common(seven)
-eight_sig = in_common(eight)
-nine_sig = in_common(nine)
+def in_common2(string):
+    sig = [],[],[],[],[],[]
+    for i in range(len(string)):
+        for k in range(3):
+            temp = []
+            sig[i].append(temp)
+            for j in range(len(string[i])):
+                if string[i][j] in knowns[k]:
+                    temp.append(True)
+    return sig
 
-#print(zero_sig)   #6
-#print(one_sig)
-print(two_sig)  #5
-print(three_sig)  #5
-#print(four_sig)
-print(five_sig)   #5
-#print(six_sig)   #6
-#print(seven_sig)
-#print(eight_sig)
-#print(nine_sig)   #6
 
-    #6 letters
-#zero   2, 3, 3
-#six    1, 3, 2
-#nine   2, 4, 3
+signatures = in_common2(unknowns)
 
-    #5 letters
-#two    1, 2, 2
-#three  2, 3, 3
-#five   1, 3, 2
+print(signatures)
+
