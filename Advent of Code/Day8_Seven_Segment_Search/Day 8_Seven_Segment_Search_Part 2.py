@@ -1,3 +1,9 @@
+#  a
+# b  c
+#  d
+# e  f
+#  g
+
 #Number of letters
     # 0: 6
     # 1: 2
@@ -18,3 +24,16 @@
 #3 is the only 5 letter digit that contains f and c
 #2 contains c
 #5 contains f
+
+
+zero = 'abcefg'
+one = 'cf'
+two = 'acdeg'
+three = 'acdfg'
+four = 'bcdf'
+five = 'abdfg'
+six = 'abdefg'
+seven = 'acf'
+eight = 'abcdefg'
+nine = 'abcdfg'
+
