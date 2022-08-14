@@ -9,7 +9,7 @@
 # It turns out each unknown number has a unique combination of shared segments with numbers (1, 4, 7)
 
     #6 letters
-#zero   2, 3, 3  =7 #Zero and Nine shares two 2 segments with One, but six uniquely shares 1
+#zero   2, 3, 3  =8 #Zero and Nine shares two 2 segments with One, but six uniquely shares 1
 #six    1, 3, 2  =6
 #nine   2, 4, 3  =9
 
@@ -17,6 +17,9 @@
 #two    1, 2, 2  =5
 #three  2, 3, 3  =8
 #five   1, 3, 2  =6
+
+    #                0           2         3          5          6          9
+#  signatures = [[2, 3, 3], [1, 2, 2], [2, 3, 3], [1, 3, 2], [1, 3, 2], [2, 4, 3]]
 
 #Now that we know the signatures for our unknown numbers we can compare them with the knowns and output the correct ones
 
@@ -30,7 +33,6 @@ knowns = ['cf', 'bcdf', 'acf', 'abcdefg']
 
 
 numbers = ['', '', '', '', '', '', '', '', '', '']
-
 
 
 def known_numbers(segs):
@@ -61,9 +63,7 @@ def in_common(string):
 
 
 def identify_unknowns(data):
-    numbers = ['', '', '', '', '', '', '', '', '', '']
-    knowns = [numbers[1], numbers[4], numbers[7], numbers[8]]
-
+    pass
 
 
 signatures = in_common(unknowns)
@@ -72,7 +72,6 @@ print(signatures)
 #numbers = known_numbers(test_data)
 #print(numbers)
 
-kn = [numbers[1], numbers[4], numbers[7], numbers[8]]
-print(kn)
+
 
 
