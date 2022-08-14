@@ -14,15 +14,16 @@ for j in range(len(display_data)): #string manupilation for data
         temp.append(display_data[j][k].split(' '))
 display_data = temp
 del temp
-#print(display_data)
+for i in display_data:
+    display_data.append(list(filter(None, display_data[i])))
+
+print(display_data)
 
 test_data = 'be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb', 'fdgacbe', 'cefdb', 'cefbgd', 'gcbe'
 test = 'fdgacbe', 'cefdb', 'cefbgd', 'gcbe'
-#          8         3        9         4
-numbers = ['', '', '', '', '', '', '', '', '', '']
 
 
-def identify_unknowns(data): #organises each scrambled signal into its correct position
+def identify_unknowns(data, decode): #organises each scrambled signal into its correct position
     numbers = ['', '', '', '', '', '', '', '', '', '']
     for i in range(len(data)):
         if len(data[i]) == 2:
@@ -33,6 +34,7 @@ def identify_unknowns(data): #organises each scrambled signal into its correct p
             numbers[4] = data[i]
         if len(data[i]) == 7:
             numbers[8] = data[i]
+
     knowns = [numbers[1], numbers[4], numbers[7], numbers[8]]
     for i in range(len(data)):
         if signature_checker(data[i], knowns) == [6, 8]:
@@ -47,10 +49,19 @@ def identify_unknowns(data): #organises each scrambled signal into its correct p
             numbers[3] = data[i]
         if signature_checker(data[i], knowns) == [5, 6]:
             numbers[5] = data[i]
-    return(numbers)
+
+    def out(key, unknown):
+        output = ''
+        for h in range(len(unknown)):
+            for l in range(10):
+                if sorted(unknown[h]) == sorted(key[k]):
+                    output += str(k)
+        return output
+
+    return out(numbers, decode)
 
 
-def signature_checker(n, knowns): #Each digit shares a unique number of segments with our four known numbers. Checking this means we can identify the numbers
+def signature_checker(n, knowns): #Each digit shares a unique number of segments with our four known numbers. Checking this means we can identify the unknown numbers
     sig = [len(n), 0]
     for i in range(len(n)):
         for j in range(3):
@@ -59,17 +70,22 @@ def signature_checker(n, knowns): #Each digit shares a unique number of segments
     return sig
 
 
-numbers = identify_unknowns(test_data)
+#numbers = identify_unknowns(test_data)
 
 
-def output(key, unknown):
-    output = ''
-    for i in range(len(unknown)):
-        for k in range(10):
-            if sorted(unknown[i]) == sorted(key[k]):
-                output += str(k)
+#def output(key, unknown):
+#    output = ''
+#    for i in range(len(unknown)):
+#        for k in range(10):
+#            if sorted(unknown[i]) == sorted(key[k]):
+#                output += str(k)
+#
+#    return output
 
-    return output
+#print(output(numbers, test))
 
 
-print(output(numbers, test))
+total = 0
+#for i in range(len(display_data[0::2])):
+#    total += identify_unknowns(display_data[0][0::2], display_data[0][1::2])
+print(total)
