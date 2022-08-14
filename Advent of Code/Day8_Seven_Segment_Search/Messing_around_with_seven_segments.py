@@ -62,8 +62,7 @@ def in_common(string):
     return sig[1:]
 
 
-def identify_unknowns(data):
-    pass
+
 
 
 signatures = in_common(unknowns)

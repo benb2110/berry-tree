@@ -1,4 +1,3 @@
-
 display_data = []
 
 with open('Display_Data.txt') as d: #importing data
