@@ -18,10 +18,6 @@
 #three  2, 3, 3  =8
 #five   1, 3, 2  =6
 
-    #                0           2         3          5          6          9
-#  signatures = [[2, 3, 3], [1, 2, 2], [2, 3, 3], [1, 3, 2], [1, 3, 2], [2, 4, 3]]
-
-#Now that we know the signatures for our unknown numbers we can compare them with the knowns and output the correct ones
 
 test_data = 'ec', 'cabfe', 'afebd', 'dbagef', 'afbcg', 'feabcd', 'cdef', 'eafdcbg', 'ecb', 'caegdb',
 
