@@ -76,3 +76,5 @@ def number_draw(draw, boards): #Checks each spot on the boards for the draw numb
 
 #print(number_draw(test_data, test_boards))
 print(number_draw(draw, board))
+
+print(__name__)

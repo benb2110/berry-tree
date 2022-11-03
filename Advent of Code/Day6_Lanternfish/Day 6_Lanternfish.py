@@ -11,7 +11,7 @@ print(test_lanternfish_data)
 
 def lanternfish_breeding(data):
     day = 0
-    while day != 80:
+    while day != 256:
         for i in range(len(data)):
             if data[i] == 0:
                 data.append(8)

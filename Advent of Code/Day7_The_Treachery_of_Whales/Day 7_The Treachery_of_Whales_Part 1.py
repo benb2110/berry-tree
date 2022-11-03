@@ -3,7 +3,7 @@ crab_pos_data = []
 l = open('Crab_Positions.txt').read().strip().split(',')
 for i in l:
     crab_pos_data.append(int(i))
-
+print(crab_pos_data)
 
 def fuel_efficient_pos(data):
     fuel_ratings = []
