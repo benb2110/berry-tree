@@ -24,7 +24,6 @@ def item_sort(instruction):
         array[destination].append(holding.pop())
     
 
-
 for i in range(len(instructions)):
     item_sort(instructions[i])
 
