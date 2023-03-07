@@ -5,7 +5,8 @@ with open('Data.txt') as d: #importing data
         commands.append(line.split())
 d.close()
 
-print(commands)
+#print(commands)
+diskspace = 70000000
 
 
 class Folder:
@@ -36,10 +37,10 @@ class File:
             parent.contents.append(self)
 
 
-root = Folder('/', 0, None)
+root = Folder('/', 0, None) #Creating instance of root directory
 
 
-def directory_sort(data):
+def directory_sort(data): #creates the file/folder structure based on instructions
     directory = root
     for i in range(len(data)):
         #print(i)
@@ -80,7 +81,7 @@ def directory_sort(data):
                 File(str(data[i][1]), int(data[i][0]), directory)
 
 
-def file_size(folder):
+def file_size(folder):  #recurse through files and folder and adding filesizes
     for item in folder.contents:
         if isinstance(item, Folder):
             file_size(item)
@@ -89,17 +90,28 @@ def file_size(folder):
             folder.size += item.size
 
 
-def size_limit(folder):
-    tot = 0
-    for item in folder.contents:
+folder_sizes = []
+
+
+def folder_sort(root): #creates a list of all folder sizes and then sorts them low to high
+    for item in root.contents:
         if isinstance(item, Folder):
-            if item.size < 100000:
-                tot += item.size
-            tot += size_limit(item)
-    return tot
+            folder_sort(item)
+            folder_sizes.append(item.size)
+    folder_sizes.sort()
 
 
-directory_sort(commands)
-file_size(root)
-print(size_limit(root))
+directory_sort(commands) #creates the file/folder structure based on instructions
+file_size(root) #calculates filesizes
 
+
+space = diskspace - root.size
+space_needed = 30000000 - space
+
+folder_sort(root)
+
+
+for i in range(len(folder_sizes)):  #finds the smallest folder that is larger than the space needed
+    if folder_sizes[i] > space_needed:
+        print(folder_sizes[i])
+        break
