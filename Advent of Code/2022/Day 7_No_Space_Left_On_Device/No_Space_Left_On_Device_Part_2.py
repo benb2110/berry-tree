@@ -41,10 +41,8 @@ root = Folder('/', 0, None) #Creating instance of root directory
 
 
 def directory_sort(data): #creates the file/folder structure based on instructions
-    directory = root
+    directory = root        #sets directory pointer location
     for i in range(len(data)):
-        #print(i)
-        #print(root.contents) # DEBUG
         if data[i][0] == '$':  #commands
             if data[i][1] == 'cd':
                 if data[i][2] == '..': #Directory out
@@ -81,10 +79,10 @@ def directory_sort(data): #creates the file/folder structure based on instructio
                 File(str(data[i][1]), int(data[i][0]), directory)
 
 
-def file_size(folder):  #recurse through files and folder and adding filesizes
+def folder_size(folder):  #recurse through files/folders and calculates foldersizes
     for item in folder.contents:
         if isinstance(item, Folder):
-            file_size(item)
+            folder_size(item)
             folder.size += item.size
         elif isinstance(item, File):
             folder.size += item.size
@@ -102,7 +100,7 @@ def folder_sort(root): #creates a list of all folder sizes and then sorts them l
 
 
 directory_sort(commands) #creates the file/folder structure based on instructions
-file_size(root) #calculates filesizes
+folder_size(root) #calculates filesizes
 
 
 space = diskspace - root.size
