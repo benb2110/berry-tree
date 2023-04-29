@@ -5,8 +5,8 @@ with open('Data.txt') as d: #importing data
         instructions.append(line.split())
 d.close()
 
-signal_sums = 0
-ref = 20
+signal_sums = 0         #Sums of signal strengths at each refence point and our answer
+ref = 20                #Reference which cycles to check in signal_check
 
 
 def signal_check(X, cycle):
