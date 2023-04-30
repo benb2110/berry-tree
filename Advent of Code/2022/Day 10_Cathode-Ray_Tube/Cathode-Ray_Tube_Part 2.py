@@ -5,10 +5,8 @@ with open('Test Data.txt') as d: #importing data
         instructions.append(line.split())
 d.close()
 
-signal_sums = 0
-ref = 20
-
 sprite_pos = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
+
 
 #init CRT display
 CRT = []
@@ -17,7 +15,7 @@ for l in range(6):
     for i in range(40):
         line.append('.')
     CRT.append(line)
-print(CRT)
+#print(CRT)
 
 
 def sprite_update(x):
@@ -26,28 +24,33 @@ def sprite_update(x):
     sprite_pos[x] = '#'
     sprite_pos[x-1] = '#'
     sprite_pos[x+1] = '#'
+    #print(sprite_pos)
 
 
 def draw_cycle(step, cycle):
     global sprite_pos, CRT
-    if sprite_pos[cycle] == '#':
-        CRT[step][cycle] = '#'
+    if sprite_pos[cycle-1] == '#':
+        CRT[step][cycle-1] = '#'
 
 
 def operations(inputs):
     x = 1
-    cycle = 0
+    cycle = 1
     step = 0
     for i in range(len(inputs)):
-        if cycle == 39:
+        if cycle == 40:
+            print(CRT[step])
             step += 1
-            cycle -= 39
-        sprite_update(x)    #update sprite position
+            cycle -= 40
+        sprite_update(x)     #update sprite position
         if str(inputs[i][0]) == 'addx':
             for loop in range(2):
-                sprite_update(x) #possibly redundant
                 draw_cycle(step, cycle)   #draw sprite
                 cycle += 1
+                if cycle == 40:
+                    print(CRT[step])
+                    step += 1
+                    cycle -= 40
             x += int(inputs[i][1])
         else:
             draw_cycle(step, cycle)     #draw sprite
@@ -56,4 +59,4 @@ def operations(inputs):
 
 
 operations(instructions)
-#print(signal_sums)
+
