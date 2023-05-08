@@ -38,10 +38,8 @@ def create_instances(monkeys):
             Monkey.name = monkeys[i][1][1]
             pass
         if i == 1:
-            for j in range(len(monkeys[1]-2)):
-                
-
             pass
+            #for j in range(len(monkeys[1]-2)): 
         if i == 2:
             pass
         if i == 3:

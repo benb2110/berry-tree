@@ -11,13 +11,13 @@ Next up I have been completing coding challenges on [Advent of Code](https://adv
 Check out the soloutions for some of my favourite problems.
 
 
-[Day 7 2022](Advent of Code/2022/Day 7_No_Space_Left_On_Device) No Space Left On Device
+- [Day 7 2022](Advent of Code/2022/Day 7_No_Space_Left_On_Device) No Space Left On Device
 
-[Day 3 2021](Advent of Code/2021/Day3_Binary_Diagnostic)  Binary Diagnostic
+- [Day 3 2021](Advent of Code/2021/Day3_Binary_Diagnostic)  Binary Diagnostic
 
-[Day 9 2022](Advent of Code/2022/Day 9_Rope_Bridge) Rope Bridge
+- [Day 9 2022](Advent of Code/2022/Day 9_Rope_Bridge) Rope Bridge
 
-[Day 10 2022](Advent of Code/2022/Day 10_Cathode-Ray_Tube) Cathode Ray Tube
+- [Day 10 2022](Advent of Code/2022/Day 10_Cathode-Ray_Tube) Cathode Ray Tube
 
 
 
