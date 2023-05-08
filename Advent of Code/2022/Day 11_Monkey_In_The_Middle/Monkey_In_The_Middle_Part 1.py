@@ -39,7 +39,7 @@ def create_instances(monkeys):
             pass
         if i == 1:
             pass
-            #for j in range(len(monkeys[1]-2)): 
+            #for j in range(len(monkeys[1]-2)):
         if i == 2:
             pass
         if i == 3:
