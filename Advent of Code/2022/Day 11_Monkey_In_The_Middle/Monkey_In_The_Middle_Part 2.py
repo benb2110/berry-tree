@@ -1,3 +1,5 @@
+##Work in Progress##
+
 monkey_list = []
 
 with open('Data.txt') as d: #importing data
@@ -26,6 +28,17 @@ class Monkey:
         self.items.append(item)
 
 
+def create_instances(monkeys):
+
+    monkey = Monkey(int(monkeys[0][1][0]), monkeys[2][4:], int(monkeys[3][3]), int(monkeys[4][5]), int(monkeys[5][5]))
+
+    items = monkeys[1][2:]
+    for num in range(len(items)):
+        monkey.add_item(int(items[num].strip(',')))
+
+    return monkey
+
+
 def monkey_operation(first_value, second_value, old):
     sec = int(old)
     old = old
@@ -39,17 +52,6 @@ def monkey_operation(first_value, second_value, old):
         return int(old) * sec
 
 
-def create_instances(monkeys):
-
-    monkey = Monkey(int(monkeys[0][1][0]), monkeys[2][4:], int(monkeys[3][3]), int(monkeys[4][5]), int(monkeys[5][5]))
-
-    items = monkeys[1][2:]
-    for num in range(len(items)):
-        monkey.add_item(int(items[num].strip(',')))
-
-    return monkey
-
-
 #create objects
 
 start = 0
@@ -59,12 +61,16 @@ for i in range(start, end, step):
     x = i
     monkey_objects.append(create_instances(monkey_list[x:x+step]))
 
-
 #rounds loop
 
 
+def shrink_number(number, prime):
+    remainder = number % prime
+    return remainder
+
+
 def keep_away():
-    rounds = 20
+    rounds = 1000
     for r in range(rounds):
         for monkey in monkey_objects:
             SPARE_LIST = monkey.items.copy()
@@ -86,7 +92,6 @@ def keep_away():
 
 keep_away()
 
-inspections = []
-for i in range(len(monkey_objects)):
-    inspections.append(monkey_objects[i].inspections)
 
+for i in range(len(monkey_objects)):
+    print(monkey_objects[i].inspections)
