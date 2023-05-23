@@ -35,7 +35,6 @@ def create_instances(monkeys):
     items = monkeys[1][2:]
     for num in range(len(items)):
         monkey.add_item(int(items[num].strip(',')))
-
     return monkey
 
 
