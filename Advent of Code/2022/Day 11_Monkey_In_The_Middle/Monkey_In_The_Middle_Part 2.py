@@ -1,5 +1,22 @@
 ##Work in Progress##
+#Factor all items store remainders in a monkey inventory list of lists
+# for each item store all remainder for the other monkeys  primes also
+                        #item 1   #item2   ...
+    #monkey0.items = [[m1,m2,m3][m1,m2,m3][...]]
 
+# We can now perform operation on the item and apply to all versions in the list
+    #monkey0.items = [[m1+1,m2+1,m3+1][m1,m2,m3][...]]
+
+#Testing the item we use the index for current monkey
+    #if monkey[0][x] == 0 then throw to monkey[y]
+    #else throw to monkey[z]
+
+#Then move the item to the inventory of monkey[y]
+    #monkey[y].items.append(monkey[0][x])
+
+
+
+    
 monkey_list = []
 
 with open('Test Data.txt') as d: #importing data
