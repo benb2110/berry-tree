@@ -13,15 +13,11 @@
 
 #Then move the item to the inventory of monkey[y]
     #monkey[y].items.append(monkey[0][x])
-
-
-
     
-monkey_list = []
-
+data = []
 with open('Test Data.txt') as d: #importing data
     for line in d:
-        monkey_list.append(line.split())
+        data.append(line.split())
 d.close()
 
 
@@ -51,71 +47,90 @@ def print_out(r):
         print("Monkey: " + str(m) + str(monkey_objects[m].items))
 
 
-
-def item_dist(monkeyitems):
-    items = monkeyitems[1][2:]
+def create_instances(monkeys):
+    monkey = Monkey(int(monkeys[0][1][0]), monkeys[2][4:], int(monkeys[3][3]), int(monkeys[4][5]), int(monkeys[5][5]))
+    items = monkeys[1][2:]
     for num in range(len(items)):
-        for monkey in range(len(monkey_objects)):
-            monkey.add_item(int(items[num].strip(',')))
+        monkey.add_item(int(items[num].strip(',')))
     return monkey
 
 
-
-def create_instances(monkeys):
-    monkey = Monkey(int(monkeys[0][1][0]), monkeys[2][4:], int(monkeys[3][3]), int(monkeys[4][5]), int(monkeys[5][5]))
-
-
-
-
-def monkey_operation(first_value, second_value, old):
-    sec = int(old)
-    old = old
-    if second_value != 'old':
-        sec = int(second_value)
-
-    if first_value == '+':
-        return int(old) + sec
-
-    if first_value == '*':
-        return int(old) * sec
+def populate_monkey_items():
+    factors = []
+    for monkey in monkey_objects:
+        factors.append(monkey.test_number)
+    for monkey in range(len(monkey_objects)):
+        for item in range(len(monkey_objects[monkey].items)):
+            item_list = []
+            for factor in range(len(factors)):
+                item_list.append(monkey_objects[monkey].items[item] % factors[factor])
+            #print(item_list)
+            monkey_objects[monkey].add_item(item_list)
+        monkey_objects[monkey].items = monkey_objects[monkey].items[int(len(monkey_objects[monkey].items)/2):]
 
 
-#create objects
+def monkey_operation(i, old):
+    monkey = monkey_objects[i]
+    sec = int(old[i]) #check this
+
+    if monkey.operation[1] != 'old':
+        sec = int(monkey.operation[1])
+
+    if monkey.operation[0] == '+':  #must recalculate % after operation
+        new_worry = []
+        for z in range(len(old)):
+            new_worry.append((old[z] + sec) % monkey_objects[z].test_number)
+        print(new_worry)
+        return new_worry
+    elif monkey.operation[0] == '*':
+        new_worry = []
+        for x in range(len(old)):
+            new_worry.append((old[x] * sec) % monkey_objects[x].test_number)
+        print(new_worry)
+        return new_worry
+
+
+#create monkey objects
 
 start = 0
-end = len(monkey_list)
+end = len(data)
 step = 7
-for i in range(start, end, step): #creates instance of monkeys
+for i in range(start, end, step):
     x = i
-    monkey_objects.append(create_instances(monkey_list[x:x+step]))
+    monkey_objects.append(create_instances(data[x:x + step]))
+populate_monkey_items()
+
 
 #rounds loop
 
-
 def keep_away():
-    rounds = 10
+    rounds = 20
     for r in range(rounds):
-        for monkey in monkey_objects:
-            SPARE_LIST = monkey.items.copy()
+        for m in range(len(monkey_objects)):
+            SPARE_LIST = monkey_objects[m].items.copy()
             for item in SPARE_LIST:
-                monkey.inspections += 1
-                new = monkey_operation(monkey.operation[0], monkey.operation[1], item)
-                worry = new // 3
-                if worry % monkey.test_number:
-                    #throw to false
-                    receiver = monkey.if_false
-                    monkey_objects[receiver].items.append(worry)
-                    monkey.items.pop(0)
-                else:
+                monkey_objects[m].inspections += 1
+                print(str(m) + " " + str(item))
+                new_worry = monkey_operation(m, item)
+
+                if new_worry[m] == 0:
                     #throw to true
-                    receiver = monkey.if_true
-                    monkey_objects[receiver].items.append(worry)
-                    monkey.items.pop(0)
-        print_out(r)
+                    receiver = monkey_objects[m].if_true
+                    monkey_objects[receiver].items.append(new_worry)
+                    monkey_objects[m].items.remove(item)
+                #else:
+                #    #throw to false
+                    receiver = monkey_objects[m].if_false
+                    monkey_objects[receiver].items.append(new_worry)
+                    monkey_objects[m].items.remove(item)
+        #print_out(r)
 
 
 keep_away()
-
-
+result = []
+answer = [99, 97, 8, 103]
 for i in range(len(monkey_objects)):
-    print(monkey_objects[i].inspections)
+    result.append(monkey_objects[i].inspections)
+
+a = result == answer
+print(a)

@@ -28,7 +28,6 @@ class Monkey:
 
 def monkey_operation(first_value, second_value, old):
     sec = int(old)
-    old = old
     if second_value != 'old':
         sec = int(second_value)
 
@@ -90,3 +89,4 @@ inspections = []
 for i in range(len(monkey_objects)):
     inspections.append(monkey_objects[i].inspections)
 
+print(inspections)
