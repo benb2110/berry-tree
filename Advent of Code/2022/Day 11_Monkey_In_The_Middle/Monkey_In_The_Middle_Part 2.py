@@ -62,8 +62,8 @@ def populate_monkey_items():
     for monkey in range(len(monkey_objects)):
         for item in range(len(monkey_objects[monkey].items)):
             item_list = []
-            for factor in range(len(factors)):
-                item_list.append(monkey_objects[monkey].items[item] % factors[factor])
+            for factor in factors:
+                item_list.append(monkey_objects[monkey].items[item] % factor)
             #print(item_list)
             monkey_objects[monkey].add_item(item_list)
         monkey_objects[monkey].items = monkey_objects[monkey].items[int(len(monkey_objects[monkey].items)/2):]
@@ -71,15 +71,15 @@ def populate_monkey_items():
 
 def monkey_operation(i, old):
     monkey = monkey_objects[i]
-    sec = int(old[i]) #check this
+    sec = int(old[i])  #check this
 
     if monkey.operation[1] != 'old':
         sec = int(monkey.operation[1])
 
     if monkey.operation[0] == '+':  #must recalculate % after operation
         new_worry = []
-        for z in range(len(old)):
-            new_worry.append((old[z] + sec) % monkey_objects[z].test_number)
+        for x in range(len(old)):
+            new_worry.append((old[x] + sec) % monkey_objects[x].test_number)
         print(new_worry)
         return new_worry
     elif monkey.operation[0] == '*':
@@ -127,6 +127,8 @@ def keep_away():
 
 
 keep_away()
+
+
 result = []
 answer = [99, 97, 8, 103]
 for i in range(len(monkey_objects)):
