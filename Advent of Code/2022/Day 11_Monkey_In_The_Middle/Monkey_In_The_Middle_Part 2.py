@@ -8,7 +8,7 @@
     #monkey0.items = [[m1+1,m2+1,m3+1][m1,m2,m3][...]]
 
 #Testing the item we use the index for current monkey
-    #if monkey[0][x] == 0 then throw to monkey[y]
+    #if monkey[x][x] == 0 then throw to monkey[y]
     #else throw to monkey[z]
 
 #Then move the item to the inventory of monkey[y]
@@ -71,21 +71,24 @@ def populate_monkey_items():
 
 def monkey_operation(m, item):
     monkey = monkey_objects[m]
-    second_value = int(item[m])     #second_value defaults to old
+       #second_value defaults to old ##HEERERE #make sure which old we are multiplying
     operator = monkey.operation[0]
 
     if monkey.operation[1] != 'old':
-        second_value = int(monkey.operation[1])
+        op = int(monkey.operation[1])
+        second_value = [op, op, op, op]
+    else:
+        second_value = item
 
     if operator == '+':
         new_worry = []
         for x in range(len(item)):
-            new_worry.append((item[x] + second_value) % monkey_objects[x].test_number)
+            new_worry.append((item[x] + second_value[x]) % monkey_objects[x].test_number)
         return new_worry
     else:
         new_worry = []
         for x in range(len(item)):
-            new_worry.append((item[x] * second_value) % monkey_objects[x].test_number)
+            new_worry.append((item[x] * second_value[x]) % monkey_objects[x].test_number)
         return new_worry
 
 
