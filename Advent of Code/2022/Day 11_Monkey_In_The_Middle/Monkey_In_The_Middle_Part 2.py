@@ -16,7 +16,7 @@
 
 
 data = []
-with open('Test Data.txt') as d: #importing data
+with open('Data.txt') as d: #importing data
     for line in d:
         data.append(line.split())
 d.close()
@@ -76,7 +76,7 @@ def monkey_operation(m, item):
 
     if monkey.operation[1] != 'old':
         op = int(monkey.operation[1])
-        second_value = [op, op, op, op]
+        second_value = [op, op, op, op, op, op, op, op]  #this needs work
     else:
         second_value = item
 
@@ -113,7 +113,6 @@ def keep_away():
             spare_list = monkey.items.copy()
             for item in range(len(spare_list)):
                 monkey.inspections += 1
-                #print(str(m) + " " + str(item))
                 new_worry = monkey_operation(m, spare_list[item])
 
                 if new_worry[m] == 0:
@@ -132,22 +131,9 @@ def keep_away():
 keep_away()
 
 
-my_result = []
-round_20_result = [99, 97, 8, 103]
-final_result = [52166, 47830, 1938, 52013]
+result = []
+
 for i in range(len(monkey_objects)):
-    my_result.append(monkey_objects[i].inspections)
-
-a = my_result == final_result
-print(a)
-print(my_result, final_result)
-
-
-#testing populate_monkey_items()
-#x = 74
-#m1_i1 = [x % 23, x % 19, x % 13, x % 17]
-#print(m1_i1)
-
-#testing if_true/false assignments
-#for i in range(len(monkey_objects)):
-#    print(monkey_objects[i].if_true)
+    result.append(monkey_objects[i].inspections)
+result = sorted(result, reverse=True)
+print(result[0]*result[1])
