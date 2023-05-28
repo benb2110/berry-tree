@@ -82,7 +82,7 @@ def monkey_operation(m, item):
         for x in range(len(item)):
             new_worry.append((item[x] + second_value) % monkey_objects[x].test_number)
         return new_worry
-    elif operator == '*':
+    else:
         new_worry = []
         for x in range(len(item)):
             new_worry.append((item[x] * second_value) % monkey_objects[x].test_number)
@@ -103,37 +103,48 @@ populate_monkey_items()
 #rounds loop
 
 def keep_away():
-    rounds = 20
+    rounds = 10000
     for r in range(rounds):
         for m in range(len(monkey_objects)):
-            SPARE_LIST = monkey_objects[m].items.copy()
-            #print(SPARE_LIST)
-            for item in range(len(SPARE_LIST)):
-                monkey_objects[m].inspections += 1
+            monkey = monkey_objects[m]
+            spare_list = monkey.items.copy()
+            for item in range(len(spare_list)):
+                monkey.inspections += 1
                 #print(str(m) + " " + str(item))
-                new_worry = monkey_operation(m, SPARE_LIST[item])
+                new_worry = monkey_operation(m, spare_list[item])
 
                 if new_worry[m] == 0:
                 #    throw to true
-                    receiver = monkey_objects[m].if_true
+                    receiver = monkey.if_true
                     monkey_objects[receiver].items.append(new_worry)
-                    monkey_objects[m].items.pop(0)
+                    monkey.items.pop(0)
                 else:
                 #    throw to false
-                    receiver = monkey_objects[m].if_false
+                    receiver = monkey.if_false
                     monkey_objects[receiver].items.append(new_worry)
-                    monkey_objects[m].items.pop(0)
+                    monkey.items.pop(0)
         #print_out(r)
 
 
 keep_away()
 
 
-result = []
-answer = [99, 97, 8, 103]
+my_result = []
+round_20_result = [99, 97, 8, 103]
+final_result = [52166, 47830, 1938, 52013]
 for i in range(len(monkey_objects)):
-    result.append(monkey_objects[i].inspections)
+    my_result.append(monkey_objects[i].inspections)
 
-a = result == answer
-print(answer, result)
+a = my_result == final_result
 print(a)
+print(my_result, final_result)
+
+
+#testing populate_monkey_items()
+#x = 74
+#m1_i1 = [x % 23, x % 19, x % 13, x % 17]
+#print(m1_i1)
+
+#testing if_true/false assignments
+#for i in range(len(monkey_objects)):
+#    print(monkey_objects[i].if_true)
