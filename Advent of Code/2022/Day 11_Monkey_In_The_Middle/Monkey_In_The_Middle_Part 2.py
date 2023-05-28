@@ -13,7 +13,8 @@
 
 #Then move the item to the inventory of monkey[y]
     #monkey[y].items.append(monkey[0][x])
-    
+
+
 data = []
 with open('Test Data.txt') as d: #importing data
     for line in d:
@@ -41,7 +42,7 @@ class Monkey:
         self.items.append(item)
 
 
-def print_out(r):
+def print_out(r):  #troubleshoot
     print("Round: " + str(r))
     for m in range(len(monkey_objects)):
         print("Monkey: " + str(m) + str(monkey_objects[m].items))
@@ -64,29 +65,27 @@ def populate_monkey_items():
             item_list = []
             for factor in factors:
                 item_list.append(monkey_objects[monkey].items[item] % factor)
-            #print(item_list)
             monkey_objects[monkey].add_item(item_list)
         monkey_objects[monkey].items = monkey_objects[monkey].items[int(len(monkey_objects[monkey].items)/2):]
 
 
-def monkey_operation(i, old):
-    monkey = monkey_objects[i]
-    sec = int(old[i])  #check this
+def monkey_operation(m, item):
+    monkey = monkey_objects[m]
+    second_value = int(item[m])     #second_value defaults to old
+    operator = monkey.operation[0]
 
     if monkey.operation[1] != 'old':
-        sec = int(monkey.operation[1])
+        second_value = int(monkey.operation[1])
 
-    if monkey.operation[0] == '+':  #must recalculate % after operation
+    if operator == '+':
         new_worry = []
-        for x in range(len(old)):
-            new_worry.append((old[x] + sec) % monkey_objects[x].test_number)
-        print(new_worry)
+        for x in range(len(item)):
+            new_worry.append((item[x] + second_value) % monkey_objects[x].test_number)
         return new_worry
-    elif monkey.operation[0] == '*':
+    elif operator == '*':
         new_worry = []
-        for x in range(len(old)):
-            new_worry.append((old[x] * sec) % monkey_objects[x].test_number)
-        print(new_worry)
+        for x in range(len(item)):
+            new_worry.append((item[x] * second_value) % monkey_objects[x].test_number)
         return new_worry
 
 
@@ -108,21 +107,22 @@ def keep_away():
     for r in range(rounds):
         for m in range(len(monkey_objects)):
             SPARE_LIST = monkey_objects[m].items.copy()
-            for item in SPARE_LIST:
+            #print(SPARE_LIST)
+            for item in range(len(SPARE_LIST)):
                 monkey_objects[m].inspections += 1
-                print(str(m) + " " + str(item))
-                new_worry = monkey_operation(m, item)
+                #print(str(m) + " " + str(item))
+                new_worry = monkey_operation(m, SPARE_LIST[item])
 
                 if new_worry[m] == 0:
-                    #throw to true
+                #    throw to true
                     receiver = monkey_objects[m].if_true
                     monkey_objects[receiver].items.append(new_worry)
-                    monkey_objects[m].items.remove(item)
-                #else:
-                #    #throw to false
+                    monkey_objects[m].items.pop(0)
+                else:
+                #    throw to false
                     receiver = monkey_objects[m].if_false
                     monkey_objects[receiver].items.append(new_worry)
-                    monkey_objects[m].items.remove(item)
+                    monkey_objects[m].items.pop(0)
         #print_out(r)
 
 
@@ -135,4 +135,5 @@ for i in range(len(monkey_objects)):
     result.append(monkey_objects[i].inspections)
 
 a = result == answer
+print(answer, result)
 print(a)
