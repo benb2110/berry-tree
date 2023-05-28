@@ -1,10 +1,9 @@
-##Work in Progress##
 #Factor all items store remainders in a monkey inventory list of lists
 # for each item store all remainder for the other monkeys  primes also
                         #item 1   #item2   ...
     #monkey0.items = [[m1,m2,m3][m1,m2,m3][...]]
 
-# We can now perform operation on the item and apply to all versions in the list
+#We can now perform operation on the item and apply to all versions in the list
     #monkey0.items = [[m1+1,m2+1,m3+1][m1,m2,m3][...]]
 
 #Testing the item we use the index for current monkey
@@ -71,7 +70,6 @@ def populate_monkey_items():
 
 def monkey_operation(m, item):
     monkey = monkey_objects[m]
-       #second_value defaults to old ##HEERERE #make sure which old we are multiplying
     operator = monkey.operation[0]
 
     if monkey.operation[1] != 'old':
@@ -136,4 +134,5 @@ result = []
 for i in range(len(monkey_objects)):
     result.append(monkey_objects[i].inspections)
 result = sorted(result, reverse=True)
-print(result[0]*result[1])
+answer = result[0]*result[1]
+print(answer)
