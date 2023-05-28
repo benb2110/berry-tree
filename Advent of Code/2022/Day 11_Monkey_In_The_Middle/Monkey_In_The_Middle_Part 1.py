@@ -85,8 +85,11 @@ def keep_away():
 
 keep_away()
 
-inspections = []
-for i in range(len(monkey_objects)):
-    inspections.append(monkey_objects[i].inspections)
 
-print(inspections)
+result = []
+
+for i in range(len(monkey_objects)):
+    result.append(monkey_objects[i].inspections)
+result = sorted(result, reverse=True)
+answer = result[0]*result[1]
+print(answer)
