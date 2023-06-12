@@ -1,63 +1,66 @@
 ##Work in Progress##
+import numpy as np
 
 trees = []
-#trees = ['30373',
-#'25512',
-#'65332',
-#'33549',
-#'35390']
 
-with open('Data.txt') as d: #importing data
+
+with open('Test Data.txt') as d: #importing data
     for line in d:
-        trees.append(line)
+        temp = []
+        for item in line:
+            temp.append(item.strip())
+        trees.append(temp[:len(temp)-1])
 d.close()
 
-print(trees)
+width, length = len(trees), len(trees[0])
 
-width = len(trees)
-length = len(trees[0])
 
-print(width)
-print(length)
+def printout():
+    print(trees)
+    print(width)
+    print(length)
 
-visible = 0
 
+trees = np.array(trees)
+#print(printout())
 
 
 def visibility_checker(x, y):
-    counter = x
-    while counter != length-1:
-        if trees[counter][y] <= trees[x][y]:
-            counter +=1
-        else:
-            return True
-    counter = x
-    while counter != 0:
-        if trees[counter][y] <= trees[x][y]:
-            counter -=1
-        else:
-            return True
-    counter = y
-    while counter != width-1:
-        if trees[x][counter] <= trees[x][y]:
-            counter +=1
-        else:
-            return True
-    counter = y
-    while counter != 0:
-        if trees[x][counter] <= trees[x][y]:
-            counter -=1
-        else:
-            return True
-    return False
+    global width, length
+    results = [True, True, True, True]
+    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)] #UP, DOWN, RIGHT, LEFT
+
+    for direction in directions:
+        i = directions.index(direction)
+        dx, dy = direction
+
+        pos = (x, y)
+        next_pos = (pos[0] + dx, pos[1] + dy)
+        while 0 <= next_pos[0] < width and 0 <= next_pos[1] < length:  #
+            if trees[x][y] > trees[next_pos] and trees[pos] >= trees[next_pos]:
+                pos = next_pos
+                next_pos = (pos[0] + dx, pos[1] + dy)
+            else:
+                results[i] = False
+                break
+
+    print(results, trees[x][y])
+
+    if results == [False, False, False, False]:
+        return False
+    else:
+        return True
 
 
-for i in range(width):
-    for j in range(length):
-        if 0 < i < length - 1 and 0 < j < width - 1:
+def func():
+    visible = 0
+    for i in range(length):
+        for j in range(width):
             if visibility_checker(i, j) is True:
-                visible +=1
-        else:
-          visible+=1
+                visible += 1
+    print(visible)
 
-print(visible)
+#print(trees[2][1])
+#visibility_checker(2, 1)
+func()
+
