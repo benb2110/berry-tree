@@ -1,57 +1,49 @@
-##Work in Progress##
+import numpy as np
 
 trees = []
 
-with open('Test Data.txt') as d: #importing data
+with open('Data.txt') as d: #importing data
     for line in d:
-        trees.append(line.split())
+        temp = []
+        for item in line:
+            temp.append(item.strip())
+        trees.append(temp[:len(temp)-1])
 d.close()
 
-#print(trees)
+trees = np.array(trees)
 
-width = len(trees)
-length = len(trees[0][0])
-
-
-visible = 0
-invisible = 0
+width, length = len(trees), len(trees[0])
 
 
-def visibility_checker(i, j):
-    counter = i
-    while counter != length-1:
-        if trees[counter][j] <= trees[i][j]:
-            counter += 1
-        else:
-            return True
-    counter = i
-    while counter != 0:
-        if trees[counter][j] <= trees[i][j]:
-            counter -= 1
-        else:
-            return True
-    counter = j
-    while counter != length-1:
-        if trees[counter][j] <= trees[i][j]:
-            counter += 1
-        else:
-            return True
-    counter = j
-    while counter != 0:
-        if trees[counter][j] <= trees[i][j]:
-            counter -= 1
-        else:
-            return True
+def visibility_checker(x, y):
+    global width, length
+    results = [True, True, True, True]
+    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)] #UP, DOWN, RIGHT, LEFT
+
+    for direction in directions:
+        i = directions.index(direction)
+        dx, dy = direction
+
+        next_pos = (x + dx, y + dy)
+        while 0 <= next_pos[0] < width and 0 <= next_pos[1] < length:
+            if trees[x][y] > trees[next_pos]:
+                next_pos = (next_pos[0] + dx, next_pos[1] + dy)
+            else:
+                results[i] = False
+                break
+
+    print(results, trees[x][y])
+
+    return any(results)
 
 
-for i in range(length):
-    for j in range(width):
-        if 0 < i < length - 1 and 0 < j < width - 1: #inside the grid
+def func():
+    visible = 0
+    for i in range(length):
+        for j in range(width):
             if visibility_checker(i, j) is True:
                 visible += 1
-        else:   #outside the grid (ignore)
-            invisible += 1
-            continue
+    print(visible)
 
-print(visible)
-print(invisible)
+
+func()
